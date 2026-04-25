@@ -1,11 +1,11 @@
-name: Finance Tracker Cron
+name: Txnly Cron
 
 on:
   schedule:
-    # Daily at 07:00 UTC
-    - cron: "0 7 * * *"
-    # Weekly on Sunday at 08:00 UTC
-    - cron: "0 8 * * 0"
+    # Daily at 16:00 UTC
+    - cron: "0 16 * * *"
+    # Weekly on Sunday at 16:00 UTC
+    - cron: "0 16 * * 0"
   workflow_dispatch:
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run finance tracker
+      - name: Run txnly tracker
         env:
           IMAP_SERVER: ${{ secrets.IMAP_SERVER }}
           IMAP_PORT: ${{ secrets.IMAP_PORT }}
