@@ -1,4 +1,4 @@
-name: Finance Tracker Cron
+name: Txnly
 
 on:
   schedule:
