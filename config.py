@@ -21,27 +21,27 @@ _load_env()
 
 class Config:
     # Email / IMAP
-    IMAP_SERVER = os.getenv("IMAP_SERVER", "imap.gmail.com")
-    IMAP_PORT = int(os.getenv("IMAP_PORT", "993"))
-    EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS", "")
-    EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD", "")
+    IMAP_SERVER = os.getenv("IMAP_SERVER") or "imap.gmail.com"
+    IMAP_PORT = int((os.getenv("IMAP_PORT") or "993"))
+    EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS") or ""
+    EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD") or ""
 
     # Telegram
-    TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
-    TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+    TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN") or ""
+    TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID") or ""
 
     # Database
-    DATABASE_URL = os.getenv("DATABASE_URL", "")
+    DATABASE_URL = os.getenv("DATABASE_URL") or ""
 
     # App
-    LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
-    REPORT_DAILY = os.getenv("REPORT_DAILY", "true").lower() == "true"
-    REPORT_WEEKLY = os.getenv("REPORT_WEEKLY", "true").lower() == "true"
+    LOG_LEVEL = os.getenv("LOG_LEVEL") or "INFO"
+    REPORT_DAILY = (os.getenv("REPORT_DAILY") or "true").lower() == "true"
+    REPORT_WEEKLY = (os.getenv("REPORT_WEEKLY") or "true").lower() == "true"
 
     # Keywords for filtering emails
     SUBJECT_KEYWORDS = [
         kw.strip()
-        for kw in os.getenv("SUBJECT_KEYWORDS", "MoMo,Debit Alert,Credit Alert").split(",")
+        for kw in (os.getenv("SUBJECT_KEYWORDS") or "MoMo,Debit Alert,Credit Alert").split(",")
     ]
 
     @classmethod
