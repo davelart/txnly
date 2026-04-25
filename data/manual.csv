@@ -1,0 +1,4 @@
+amount,type,source,sender,recipient,category,reference,date,raw_text
+200.0,debit,manual,You,Landlord,Housing,RENT-001,2025-04-05,Monthly rent payment
+35.0,debit,manual,You,Clinic,Health,CLN-882,2025-04-06,Doctor consultation
+500.0,credit,manual,Client,You,Income,INV-002,2025-04-07,Freelance project payment
