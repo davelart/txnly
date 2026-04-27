@@ -2,10 +2,10 @@ name: Txnly Cron
 
 on:
   schedule:
-    # Daily at 16:00 UTC
-    - cron: "0 16 * * *"
-    # Weekly on Sunday at 16:00 UTC
-    - cron: "0 16 * * 0"
+    # Daily at 18:00 UTC
+    - cron: "0 18 * * *"
+    # Weekly on Sunday at 18:00 UTC
+    - cron: "0 18 * * 0"
   workflow_dispatch:
 
 jobs:

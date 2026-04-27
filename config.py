@@ -44,6 +44,13 @@ class Config:
         for kw in (os.getenv("SUBJECT_KEYWORDS") or "MoMo,Debit Alert,Credit Alert").split(",")
     ]
 
+    # SMS Configuration
+    SMS_SOURCE = os.getenv("SMS_SOURCE") or "file"  # 'twilio' or 'file'
+    SMS_FILE_PATH = os.getenv("SMS_FILE_PATH") or "data/sms.txt"
+    TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID") or ""
+    TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN") or ""
+    TWILIO_PHONE_NUMBER = os.getenv("TWILIO_PHONE_NUMBER") or ""
+
     @classmethod
     def validate(cls):
         missing = []

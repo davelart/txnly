@@ -10,6 +10,7 @@ from models import Transaction
 from parsers.bank_parser import BankParser
 from parsers.momo_parser import MoMoParser
 from services.email_service import fetch_unread_emails
+from services.sms_service import fetch_sms
 from services.reporting_service import run_scheduled_reports
 from utils import setup_logging, parse_iso
 
@@ -90,6 +91,26 @@ def parse_email_transactions():
     logger.info("Parsed and inserted %d new transactions from emails", parsed)
 
 
+def parse_sms_transactions():
+    """Fetch SMS messages and parse transactions."""
+    sms_messages = fetch_sms(Config.SMS_SOURCE)
+    parsed = 0
+    for msg_id, body in sms_messages:
+        for parser in PARSERS:
+            if parser.can_parse(body):
+                try:
+                    tx = parser.parse(body)
+                    if tx:
+                        inserted = db.insert_transaction(tx)
+                        if inserted:
+                            parsed += 1
+                        break
+                except Exception as exc:
+                    logger.error("Parser %s failed on msg_id=%s: %s", type(parser).__name__, msg_id, exc)
+                    continue
+    logger.info("Parsed and inserted %d new transactions from SMS", parsed)
+
+
 def ingest_manual_transactions():
     """Load and store manual transactions."""
     txs = load_manual_transactions()
@@ -112,6 +133,7 @@ def main():
 
     db.init_db()
     parse_email_transactions()
+    parse_sms_transactions()
     ingest_manual_transactions()
     run_scheduled_reports(
         report_daily=Config.REPORT_DAILY,

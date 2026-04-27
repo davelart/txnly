@@ -51,8 +51,8 @@ def extract_date(text: str) -> datetime:
 
 
 def period_dates(period: str) -> tuple:
-    """Return (start, end) for daily, weekly, monthly summaries."""
-    now = datetime.now(timezone.utc)
+    """Return (start, end) for daily, weekly, monthly summaries using local time."""
+    now = datetime.now()
     if period == "daily":
         start = now.replace(hour=0, minute=0, second=0, microsecond=0)
         end = start + timedelta(days=1)

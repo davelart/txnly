@@ -134,6 +134,10 @@ def get_summary(start: Optional[datetime] = None, end: Optional[datetime] = None
         if r["type"] == "debit" and r["category"]:
             categories[r["category"]] = categories.get(r["category"], 0.0) + float(r["amount"])
     top_categories = sorted(categories.items(), key=lambda x: x[1], reverse=True)[:5]
+    
+    # Include recent transactions (last 10)
+    recent_transactions = rows[:10] if len(rows) > 10 else rows
+    
     return {
         "period": f"{start.date() if start else 'all'} to {end.date() if end else 'all'}",
         "count": len(rows),
@@ -141,4 +145,5 @@ def get_summary(start: Optional[datetime] = None, end: Optional[datetime] = None
         "total_expense": round(total_expense, 2),
         "net_balance": round(net, 2),
         "top_spending_categories": top_categories,
+        "recent_transactions": recent_transactions,
     }

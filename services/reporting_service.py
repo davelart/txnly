@@ -25,6 +25,17 @@ def format_summary(summary: dict) -> str:
         lines.append("<b>Top Spending:</b>")
         for cat, amt in summary["top_spending_categories"]:
             lines.append(f"  {cat}: GHS {amt:.2f}")
+    
+    # Add recent transactions
+    if summary.get("recent_transactions"):
+        lines.append("")
+        lines.append("<b>Recent Transactions:</b>")
+        for tx in summary["recent_transactions"]:
+            tx_type = "📥" if tx["type"] == "credit" else "📤"
+            amount = f"GHS {float(tx['amount']):.2f}"
+            date_str = tx["date"].strftime("%Y-%m-%d %H:%M") if tx["date"] else "N/A"
+            lines.append(f"{tx_type} {amount} - {tx.get('sender', tx.get('recipient', 'Unknown'))} | {date_str}")
+    
     return "\n".join(lines)
 
 
@@ -38,7 +49,7 @@ def generate_report(period: str, start: Optional[datetime] = None, end: Optional
 
 
 def run_scheduled_reports(report_daily: bool = True, report_weekly: bool = True):
-    now = datetime.utcnow()
+    now = datetime.now()
 
     if report_daily:
         daily = generate_report("daily")

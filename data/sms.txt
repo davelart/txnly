@@ -1,0 +1,6 @@
+You have received GHS 50.00 from John Doe with reference 1234567890. Current balance: GHS 150.00
+You have sent GHS 20.00 to Jane Smith. Transaction ID: 9876543210
+Debit of GHS 15.50 to MTN Ghana Reference: TXN001
+You have bought airtime worth GHS 5.00 from MTN Transaction ID: AIR002
+You have deposited GHS 100.00 into your account from Agent Reference: DEP003
+You have cashed out GHS 30.00 at ATM Reference: CASH004
